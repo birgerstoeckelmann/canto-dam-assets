@@ -16,8 +16,11 @@ let isLoadingComplete = false;
 let _formatDistrict = '';
 const MAX_CONTENT_REQUEST_ITEMS = 100;
 const MAX_ALBUM_REQUEST_ITEMS = 1000;
-const FILTER_BY_APPROVED = "&approval=Approved";
+
 let selectedAlbum = null;
+
+let startFolderId = '';
+let filterByApproval = '';
 
 /* -----------------canto API start-------------------------------------------------------------*/
 
@@ -33,7 +36,7 @@ function setToken(tokenInfo) {
 }
 
 cantoAPI.loadTree = function (callback) {
-  var url = "https://" + _tenants + "/api/v1/tree?sortBy=name&sortDirection=ascending&layer=1";
+  var url = "https://" + _tenants + `/api/v1/tree${startFolderId ? '/'+startFolderId : ''}?sortBy=name&sortDirection=ascending&layer=1`;
   $.ajax({
     headers: _APIHeaders,
     type: "GET",
@@ -67,7 +70,7 @@ cantoAPI.getListByAlbum = function (albumID, callback) {
     return;
   }
   let filterString = loadMoreHandler(singleCountLoad);
-  let url = `https://${_tenants}/api/v1/album/${albumID}?${filterString}${FILTER_BY_APPROVED}`;
+  let url = `https://${_tenants}/api/v1/album/${albumID}?${filterString}${filterByApproval}`;
   $.ajax({
     type: "GET",
     headers: _APIHeaders,
@@ -134,7 +137,7 @@ cantoAPI.getListByScheme = function (scheme, callback) {
       return;
     }
     let filterString = loadMoreHandler(singleCountLoad);
-    let url = `https://${_tenants}/api/v1/${scheme}?${filterString}${FILTER_BY_APPROVED}`;
+    let url = `https://${_tenants}/api/v1/${scheme}?${filterString}${filterByApproval}`;
     $.ajax({
       type: "GET",
       headers: _APIHeaders,
@@ -183,7 +186,7 @@ cantoAPI.getFilterList = function (data, callback) {
     return;
   }
   let filterString = loadMoreHandler(singleCountLoad);
-  let url = `https://${_tenants}/api/v1/search?${filterString}${FILTER_BY_APPROVED}`;
+  let url = `https://${_tenants}/api/v1/search?${filterString}${filterByApproval}`;
   url += `&keyword=${data.keywords}`;
   if (data.scheme && data.scheme == "allfile") {
     url += `&scheme=${encodeURIComponent("image|presentation|document|audio|video|other")}`;
@@ -233,7 +236,7 @@ cantoAPI.logout = function () {
  */
 cantoAPI.paginatedAlbumRequest = async (buffer, albumId, start = 0) => {
   let url = `https://${_tenants}/api/v1/album/${albumId}`;
-  let filterString = `sortBy=time&sortDirection=descending&limit=${MAX_ALBUM_REQUEST_ITEMS}&start=${start}${FILTER_BY_APPROVED}`;
+  let filterString = `sortBy=time&sortDirection=descending&limit=${MAX_ALBUM_REQUEST_ITEMS}&start=${start}${filterByApproval}`;
   let result = await fetch(`${url}?${filterString}`, {
     method: "get",
     headers: {
@@ -260,7 +263,7 @@ cantoAPI.paginatedAlbumRequest = async (buffer, albumId, start = 0) => {
  * @returns {Promise<*>}
  */
 cantoAPI.paginatedContentRequest = async (buffer, imageArray, start = 0) => {
-  let url = `https://${_tenants}/api/v1/batch/content?${FILTER_BY_APPROVED}`;
+  let url = `https://${_tenants}/api/v1/batch/content?${filterByApproval}`;
   const imageArraySubset = imageArray.slice(start, start + MAX_CONTENT_REQUEST_ITEMS);
   let result = await fetch(url, {
     method: "post",
@@ -356,6 +359,9 @@ $(document).ready(function () {
 
   window.addEventListener("message", (event) => {
     let tokenInfo = event.data;
+
+    startFolderId = parent.document.querySelector(".canto-uc-subiframe").dataset.startFolderId;
+    filterByApproval = parent.document.querySelector(".canto-uc-subiframe").dataset.filterByApproval;
 
     if (tokenInfo && tokenInfo.accessToken && tokenInfo.accessToken.length > 0) {
       setToken(tokenInfo);

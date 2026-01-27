@@ -32,12 +32,12 @@
     "src": "src/fonts/icomoon_flight_01.woff"
   },
   "src/js/app.ts": {
-    "file": "assets/app-BT2yVkMG.js",
+    "file": "assets/app-1E2ZzA5j.js",
     "name": "app",
     "src": "src/js/app.ts",
     "isEntry": true,
     "css": [
-      "assets/app-DSZydULW.css"
+      "assets/app-Btr1e3dj.css"
     ],
     "assets": [
       "assets/icomoon_flight_01-DhBPfpZj.eot",
@@ -51,13 +51,13 @@
     ]
   },
   "src/js/canto-embed.js": {
-    "file": "assets/canto-embed-CFOFDNHb.js",
+    "file": "assets/canto-embed-Dpl92YUd.js",
     "name": "canto-embed",
     "src": "src/js/canto-embed.js",
     "isEntry": true
   },
   "src/js/canto-field.js": {
-    "file": "assets/canto-field-Cv-mZzFk.js",
+    "file": "assets/canto-field-DJnIyj9H.js",
     "name": "canto-field",
     "src": "src/js/canto-field.js",
     "isEntry": true

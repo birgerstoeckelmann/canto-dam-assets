@@ -10,6 +10,8 @@
     env,
     appId,
     tenantHostName,
+    startFolderId,
+    filterByApproved,
     formatDistrict;
 
   const pluginName = "CantoDamConnector",
@@ -179,6 +181,8 @@
     env = options.env;
     appId = options.appId;
     tenantHostName = options.tenantHostName;
+    startFolderId = options.startFolderId;
+    filterByApproved = options.filterByApproved
     formatDistrict = options.extensions;
   }
 
@@ -213,6 +217,8 @@
       $(cantoUCFrame).attr("data-type", type);
       $(cantoUCFrame).attr("data-access", tokenInfo.accessToken);
       $(cantoUCFrame).attr("data-tenant", tokenInfo.tenant);
+      $(cantoUCFrame).attr("data-start-folder-id", startFolderId);
+      $(cantoUCFrame).attr("data-filter-by-approval", filterByApproved);
       $(cantoUCFrame).attr("src", cantoContentPage);
     } else {
       $(cantoUCFrame).attr("data-element", elementId);

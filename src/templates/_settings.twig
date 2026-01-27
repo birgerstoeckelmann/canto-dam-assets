@@ -25,7 +25,7 @@
     value: settings.authEndpoint,
     suggestEnvVars: true
 }) }}
-<p>{{ "If the app ID or secret key is needed in the URL include it as <strong>{appId}</strong> or <strong>{secretKey}</strong> with no spaces.</p>"|t("_canto-dam-assets") }}
+<p>{{ "If the app ID or secret key is needed in the URL include it as <strong>{appId}</strong> or <strong>{secretKey}</strong> with no spaces.</p>"|t("_canto-dam-assets") }}</p>
 
 {{ forms.autosuggestField({
     label: "Tenant Host Name"|t("_canto-dam-assets"),
@@ -41,3 +41,18 @@
     value: settings.webhookSecureToken,
     suggestEnvVars: true
 }) }}
+<hr/>
+{{ forms.autosuggestField({
+    label: "Start folder id"|t("_canto-dam-assets"),
+    name: 'startFolderId',
+    value: settings.startFolderId,
+    suggestEnvVars: true
+}) }}
+
+{{ forms.autosuggestField({
+    label: "Filter by approvel"|t("_canto-dam-assets"),
+    name: 'filterByApproval',
+    value: settings.filterByApproval,
+    suggestEnvVars: true
+}) }}
+

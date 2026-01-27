@@ -196,6 +196,8 @@ class CantoDamAsset extends Field implements PreviewableFieldInterface
             'prefix' => Html::namespaceId('', $namespace),
             'appId' => CantoDamAssets::$plugin->getSettings()->getAppId(),
             'tenantHostName' => CantoDamAssets::$plugin->getSettings()->getTenantHostName(),
+            'startFolderId' => CantoDamAssets::$plugin->getSettings()->getStartFolderId(),
+            'filterByApproved' => CantoDamAssets::$plugin->getSettings()->getFilterByApproval(),
             'bodyClass' => self::PICKER_TYPE_CLASS_MAP[$this->cantoAssetPickerType] ?? self::PICKER_TYPE_CLASS_MAP['singleImagePicker'],
         ]);
         $view->registerJs(

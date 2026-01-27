@@ -16,6 +16,8 @@ class Settings extends Model
     public string $tenantHostName = "";
     public string $secretKey = "";
     public string $webhookSecureToken = "";
+    public string $startFolderId = "";
+    public string $filterByApproval = "&approval=Public (Öffentlich)";
 
     /**
      * @inheritdoc
@@ -75,6 +77,14 @@ class Settings extends Model
         return App::parseEnv($this->webhookSecureToken);
     }
 
+    public function getStartFolderId(): string {
+        return App::parseEnv($this->startFolderId);
+    }
+
+    public function getFilterByApproval(): string {
+        return App::parseEnv($this->filterByApproval);
+    }
+
     /**
      * @inheritDoc
      */
@@ -125,6 +135,8 @@ class Settings extends Model
                     'tenantHostName',
                     'secretKey',
                     'webhookSecureToken',
+                    'startFolderId',
+                    'filterByApproval'
                 ],
             ],
         ];
