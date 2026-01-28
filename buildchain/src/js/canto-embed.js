@@ -43,7 +43,8 @@ cantoAPI.loadTree = function (callback) {
     url: url,
     async: true,
     error: function () {
-      alert("load tree error");
+      //alert("load tree error");
+      console.error("load tree error");
     },
     success: function (data) {
       callback(data.results);
@@ -58,7 +59,8 @@ cantoAPI.loadSubTree = function (treeID, callback) {
     url: url,
     async: true,
     error: function () {
-      alert("load tree error");
+      //alert("load tree error");
+      console.error("load tree error");
     },
     success: function (data) {
       callback(data.results);
@@ -77,7 +79,8 @@ cantoAPI.getListByAlbum = function (albumID, callback) {
     url: url,
     async: true,
     error: function () {
-      alert("load list error");
+      //alert("load list error");
+      console.error("load list error");
     },
     success: function (data) {
       currentImageList.push.apply(currentImageList, data.results);
@@ -144,7 +147,8 @@ cantoAPI.getListByScheme = function (scheme, callback) {
       url: url,
       async: false,
       error: function () {
-        alert("load list error");
+        //alert("load list error");
+        console.error("load list error");
       },
       success: function (data) {
         currentImageList.push.apply(currentImageList, data.results);
@@ -173,7 +177,8 @@ cantoAPI.getDetail = function (contentID, scheme, callback) {
     url: url,
     async: true,
     error: function () {
-      alert("load detail error");
+      //alert("load detail error");
+      console.error("load detail error");
     },
     success: function (data) {
       callback(data);
@@ -199,7 +204,8 @@ cantoAPI.getFilterList = function (data, callback) {
     url: url,
     async: false,
     error: function () {
-      alert("load List error");
+      //alert("load List error");
+      console.error("load List error");
     },
     success: function (data) {
       currentImageList.push.apply(currentImageList, data.results);
@@ -944,6 +950,9 @@ function loadMoreAction() {
     cantoAPI.getListByAlbum(albumId, imageListDisplay);
   } else {
     let initSchme = $("#cantoViewBody").find(".type-font.current").data("type");
+    if(!initSchme) {
+      initSchme = 'allfile';
+    }
     getImageInit(initSchme);
   }
 }
